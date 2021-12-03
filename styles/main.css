@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  #__next {
+    @apply h-full bg-yellow-500;
+  }
+  html,
+  body {
+    @apply h-full;
+  }
+}
+
+.lesson-block {
+  @apply flex-1 h-full flex flex-col;
+}
+
+.home-block {
+  @apply p-6 mt-6 text-left border-2 rounded-lg border-white text-white w-96 hover:text-black focus:text-black hover:border-black focus:border-black;
+}
