@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Layout from '../../components/Layout';
 import Counter from '../../lessons/useReducer/counter';
 
-export default function UseReducerPage({ content, ...props }) {
+export default function UseRefPage({ content, ...props }) {
   const step = Number(props.step);
   return (
     <Layout>
@@ -38,7 +38,7 @@ export default function UseReducerPage({ content, ...props }) {
 }
 
 export async function getStaticProps({ params }) {
-  const path = `useReducer-${params.slug}`;
+  const path = `useRef-${params.slug}`;
   const doc = getDocBySlug(path);
   const content = await markdownToHtml(doc.content || '');
 

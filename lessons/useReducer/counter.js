@@ -6,12 +6,11 @@ function Counter() {
   const increment = () => setCount(count + 1);
 
   return (
-    <button
-      className="block border rounded-full bg-white h-20 w-20 shadow-sm font-bold"
-      onClick={increment}
-    >
-      {count}
-    </button>
+    <>
+      <button className="counter-btn" onClick={increment}>
+        {count}
+      </button>
+    </>
   );
 }
 

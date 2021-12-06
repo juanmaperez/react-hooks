@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  #__next {
+    @apply min-h-screen bg-yellow-500;
+  }
+  html,
+  body {
+    @apply min-h-screen;
+  }
+}
+
+.counter-btn {
+  @apply block border rounded-full bg-white h-20 w-20 shadow-sm font-bold;
+}
+
+.lesson-block {
+  @apply flex-1 min-h-screen flex flex-col;
+}
+
+.home-block {
+  @apply p-6 mt-6 text-left border-2 rounded-lg border-white text-white w-96 hover:text-black focus:text-black hover:border-black focus:border-black;
+}
+
+.prose {
+  font-size: 0.9em !important;
+  h1,
+  h2,
+  h3 {
+    margin-top: 0px !important;
+    color: white !important;
+    text-decoration: underline !important;
+  }
+  p {
+    margin: 0 0 0.5em !important;
+  }
+  a,
+  strong {
+    color: #c27803 !important;
+  }
+
+  ul {
+    list-style: none !important;
+    margin: 0 0 0.5em !important;
+    li {
+      margin: 0 !important;
+    }
+  }
+}
