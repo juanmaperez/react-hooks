@@ -1,47 +1,47 @@
-# UseRef
+# UseReducer
 
-### History of reference
+### useState vs useReducer
 
-References were used in React basically to access to DOM nodes.
+useState can get you really far, but the idea of useReducer is:
+
+- manage complex states as objects
+- extract out the logic that updates your state
+
+### useReducer structure
+
+useReducer hook will receive 2 parameters:
+
+- reducer
+- initial state
+
+and it's gonna a return 2 values:
+
+- current state
+- dispatch function
 
 ```javascript
-this.inputRef = React.createRef();
-
-return <input ref={inputRef} type="text" />;
+const [state, dispatch] = useReducer(reducer, initialState);
 ```
 
-### useRef initialization and accessing the value.
+### Reducer
 
-useRef brought a new opportunity to use refs in the same way than before but also as a **reference to a value**:
+The reducer is basically a function that receives 2 parameters:
 
-We can initialize useRef in different ways:
+- the current state
+- the action: is something that is gonna tell us how to update our state
 
-- with a value, passed when the hook is called
+and returns the new state.
 
 ```javascript
-const myRef = useRef(4);
+function reducer(state, action) {
+  // returns the new state
+}
 ```
 
-- as undefined
+### Dispatch function
+
+- the dispatch function is what we use to update the state. It receives a parameter, the action that our reducer is gonna receive at some point
 
 ```javascript
-const myRef = useRef();
-```
-
-and we can access to the ref value through the property **current**, always present in the ref `myRef.current`.
-
-### Assigning a value.
-
-When you initialize the reference as undefined, you can assign a value through the DOM
-
-```javascript
-return <input ref={inputRef} type="text" />;
-```
-
-and from now on this ref it's gonna reference the DOM node where it was initialize, giving us access to the properties of that node.
-
-And also we can **assign directly the value to the property current** of the ref
-
-```javascript
-myRef.current = 21;
+dispatch(action);
 ```

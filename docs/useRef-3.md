@@ -1,33 +1,57 @@
-# useReducer
+# UseRef
 
-How your implementation should looks like now:
+Let's use this as a new starting point:
 
 ```javascript
-function countReducer(state, action) {
-  return action;
-}
-
 function Counter() {
-  const [count, setCount] = useReducer(countReducer, 0);
+  const [count, setCount] = useState(0);
 
-  const increment = () => setCount(count + 1);
+  const updateCount = () => setCount(count + 1);
+
+  console.log('I am rendered!');
 
   return (
-    <>
-      <button onClick={increment}>{count}</button>
-    </>
+    <div className="flex flex-row space-x-3">
+      <button onClick={updateCount} className="white-btn">
+        count: {count}
+      </button>
+      <button onClick={() => console.log(count)} className="white-btn">
+        print
+      </button>
+    </div>
   );
 }
 ```
 
-### Using a step as action to update the state
+### useRef vs useState
 
-Now our counter is gonna a receive a prop called step, and that prop is what we are gonna use to update our state.
+Both hooks **persist their value between rerenders**
 
-What we need to do for implementing the new feature is
+The main differences between useState and useRef are
 
-- **add a prop called step** in the counter which defaults to 2 if it's not passed
-- **pass the step to setCount** to be used in our reducer
-- implement the **logic in our reducer** to make this work
+- **useRef never triggers a rerender when its value is updated** and useState does.
+- **useRef.current is mutable**, you can assign values directly.
+- **useRef returns a single value** while useState returns an array with the state and the set function.
+- **useRef can be used for DOM nodes** and useState does not.
 
-&nbsp;
+In the example:
+
+- when you click on the count button it **increases the count and that's reflected in the UI**
+- but also prints the message in the console **I am rendered**
+
+Let's change that to see what happens with useRef:
+
+- switch useState by useRef and assign the value to a const **countRef**
+- modify the arrow function in updateCount to **countRef.current =+ 1**
+- modify the value **count** in the count button to use **countRef.current**
+- update the console.log in the print button to **console.log the countRef.current**
+
+Now neither the UI will be updated or the input will change its value, but if we click on print we see the real value of the ref.
+
+### when useRef is useful
+
+**Use useRef when you need information that is available regardless of component lifecycle and whose changes should NOT trigger rerenders.**
+
+- listeners
+- values that change the behaviour of your code
+- information that it's not shown in the UI

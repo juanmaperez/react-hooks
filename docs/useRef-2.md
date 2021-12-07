@@ -1,30 +1,57 @@
-# UseReducer
-
-This is what you got in your counter component:
+# UseRef
 
 ```javascript
-function Counter() {
-  const [count, setCount] = useState(0);
-
-  const increment = () => setCount(count + 1);
+function Form() {
+  const inputRef = useRef();
 
   return (
     <>
-      <button onClick={increment}>{count}</button>
+      <input className="input" type="text" />
     </>
   );
 }
 ```
 
-### Implementing a basic useReducer
+### Interacting with the DOM
 
-Using useReducer for a counter is overkilled but let's try that out to see how it would look like
+Our `form` component has already created a ref with useRef for our input so
 
-Our setCount function should remain as it is, receiving the same value. so it's the reducer the one managing the logic:
+Add to that **inputRef** the actual input in the DOM
 
-- Replace useState with **useReducer**
-- Create a function called **countReducer**
-- **Pass the countReducer** as first parameter to useReducer
-- **Implement reducer's logic** to make the action that we are dispatching work updating our state
+```javascript
+ref = { inputRef };
+```
 
-&nbsp;
+Now you can console the **inputRef** in your component and see the different values(the property current should have the input)
+
+```javascript
+console.log(inputRef);
+```
+
+Pretty cool! and now print in the console the value for the current property inside the ref
+
+```javascript
+console.log(inputRef.current);
+```
+
+What? what happened?
+
+The reason for this behavior is because
+
+**The input is not assigned to the ref until the DOM is printed, and that happens after the console.log**
+
+On the other hand, inside of an `useEffect` we would be able to interact with that DOM node.
+
+Try this instead of the console.log
+
+```javascript
+inputRef.current.focus();
+```
+
+And now wrap the same code but inside of a useEffect
+
+```javascript
+useEffect(() => {
+  inputRef.current.focus();
+}, []);
+```

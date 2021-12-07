@@ -1,16 +1,27 @@
+import { useState } from 'react';
 import { getDocBySlug, getAllDocs } from '../../lib/docs';
 import markdownToHtml from '../../lib/markdown';
 import Link from 'next/link';
 import Layout from '../../components/Layout';
-import Counter from '../../lessons/useReducer/counter';
+import Form from '../../lessons/useRef/form';
 
 export default function UseRefPage({ content, ...props }) {
+  const [formVisible, setFormVisible] = useState(true);
   const step = Number(props.step);
   return (
     <Layout>
       <div className="flex flex-row w-full min-h-screen">
-        <div className="lesson-block p-2 justify-center items-center bg-yellow-500">
-          <Counter />
+        <div className="lesson-block p-2 items-center bg-yellow-500 pt-40">
+          {step === 4 && (
+            <button
+              className="white-btn"
+              onClick={() => setFormVisible(!formVisible)}
+            >
+              {formVisible ? 'hide' : 'show'}
+            </button>
+          )}
+          <br />
+          {formVisible && <Form />}
         </div>
         <div className="lesson-block bg-black text-white p-6 justify-between">
           <article
@@ -19,14 +30,14 @@ export default function UseRefPage({ content, ...props }) {
           />
           <div className="flex flex-row justify-between">
             {step !== 1 ? (
-              <Link href={`/useReducer/${step - 1}`}>
+              <Link href={`/useRef/${step - 1}`}>
                 <a className="border border-white py-1 px-4">Previous</a>
               </Link>
             ) : (
               <span></span>
             )}
             {step < 5 && (
-              <Link href={`/useReducer/${step + 1}`}>
+              <Link href={`/useRef/${step + 1}`}>
                 <a className="border border-white py-1 px-4">Next</a>
               </Link>
             )}

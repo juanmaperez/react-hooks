@@ -1,35 +1,44 @@
-# useReducer
+# UseRef
 
-How your implementation should looks like now:
+Let's use this as a new starting point:
 
 ```javascript
-function countReducer(state, action) {
-  return state + action;
-}
+function Counter() {
+  const [count, setCount] = useState(0);
 
-function Counter({ step = 2 }) {
-  const [count, setCount] = useReducer(countReducer, 0);
-
-  const increment = () => setCount(step);
+  const updateCount = () => setCount(count + 1);
 
   return (
-    <>
-      <button onClick={increment}>{count}</button>
-    </>
+    <div className="flex flex-row space-x-3">
+      <button onClick={updateCount} className="counter-btn">
+        count: {count}
+      </button>
+    </div>
   );
 }
 ```
 
-### Using objects
+### useRef as reference if component is mounted
 
-Until now we have used primitive values for our state and action but now we want to use objects.
+Let's make an easy example to use this useRef. We want to know before setting the new value for count if the component is visible.
 
-So the next instructions to change our implementation are the following:
+We will make use of setTimeout to delay 3 seconds the delay of setCount and in the meantime we will remove the counter from the view with the hide button.
 
-- **update the naming** used for the values returned from the useReducer to be **state and dispatch**
-- **create an object as state** where the only property is count and the initial value is 0
-- **dispatch an object as an action** with an unique property called step
-- implement the **logic in our reducer** to make this work
-- **update the UI** to show the count
+- **Add a timeout of 3 seconds** around the updateCount function in the onClick.
 
-&nbsp;
+```javascript
+onClick={() => setTimeout(updateCount, 3000)}
+```
+
+- Now click on the **count button** and right after **click on hide**
+- You should see an error in the console.
+
+Let's fix that:
+
+- **Create a ref called isMounted** and initialize it without any value.
+- **Create an useEffect with an empty dependency array**
+- Inside of the callback function of the useEffect **set isMounted.current to true**
+- **In the return callback of the useEffect**, return an arrow function that sets the value of **isMounted.current as false**
+- In the updateCount function just call setCount if **isMounted.current is true**
+
+**Now make the same steps that were causing the error**

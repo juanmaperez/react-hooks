@@ -41,6 +41,10 @@
     color: #c27803 !important;
   }
 
+  code {
+    color: #999;
+  }
+
   ul {
     list-style: none !important;
     margin: 0 0 0.5em !important;
@@ -48,4 +52,12 @@
       margin: 0 !important;
     }
   }
+}
+
+.input {
+  @apply py-1 px-2 bg-yellow-500 rounded-md outline-none border border-white text-white focus:border-black;
+}
+
+.white-btn {
+  @apply py-1 px-2 text-yellow-500 rounded-md outline-none border border-white bg-white hover:text-black;
 }
