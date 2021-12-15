@@ -35,10 +35,10 @@ onClick={() => setTimeout(updateCount, 3000)}
 
 Let's fix that:
 
-- **Create a ref called isMounted** and initialize it without any value.
+- **Create a ref called isMounted** and initialize it without value.
 - **Create an useEffect with an empty dependency array**
 - Inside of the callback function of the useEffect **set isMounted.current to true**
-- **In the return callback of the useEffect**, return an arrow function that sets the value of **isMounted.current as false**
+- **In the return callback of the useEffect**, set the value of **isMounted.current as false**
 - In the updateCount function just call setCount if **isMounted.current is true**
 
 **Now make the same steps that were causing the error**
